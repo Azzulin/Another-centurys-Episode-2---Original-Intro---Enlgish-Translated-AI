@@ -148,7 +148,7 @@ def catalog(iso):
     out = []
     for rid in test.ids():
         head, size = peek(test, rid, 12)
-        if head[:4] != b'\0\1\0\0' or is_packed(head) or size > 4 << 20 or rid not in base.index.by_id:
+        if head[:4] != b'\0\1\0\0' or is_packed(head, size) or size > 4 << 20 or rid not in base.index.by_id:
             continue
         old, new = base.get(rid), test.get(rid)
         mt = mission_table(old)

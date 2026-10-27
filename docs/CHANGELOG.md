@@ -1,5 +1,98 @@
 # Changelog
 
+## Patch 0.0.17 publicado — 2026-10-27 (sem build nova)
+
+- `make_patch.py --version 0.0.17` com o xdelta3 3.0.11 (`C:\Users\gabri\AceTools\xdelta3\xdelta3.exe`), 2 min 38 s:
+  `ACE2-EN-0.0.17.xdelta` com 38.911.993 bytes (SHA-256
+  `073c853666b7f43dcd04eecbee627e7eb46a426a0788734151fa02cece29ee06`). A decodificação de conferência passou. A
+  saída com a abertura da SVV dá `8e8c5ed1740faa7924ce50f10913fcb1ecfb1ace0d80185185594ffc8e1be579`; com o
+  `swap_movie.py` e o disco de 2006, `33fad6e5…2300a8d`, a 0.0.17 auditada.
+- O `ace2lib.py` mudou um minuto depois da build da 0.0.17 (parâmetro `size` do `is_packed`, para o
+  `crash_watch.py`). Conferido: `build.py --version 0.0.17 --svv-opening --write` com o código atual dá
+  `8e8c5ed1…1be579`, igual à saída do patch. A build de conferência foi apagada.
+- Repositório no estado da 0.0.17 (pre-release `v0.0.17` no GitHub). O `CLAUDE.md` passou a ir para o repositório
+  (lista de cópia do `RELEASING.md` atualizada).
+- Guia novo `docs/TAKING_OVER.md` (em inglês) para quem assumir o projeto ou começar uma tradução própria: montar o
+  ambiente e provar que reproduz a 0.0.17, as regras, o ciclo de uma correção, a fila de trabalho em ordem (a mesma
+  do ESTUDO 8.6, mais as recomendações da auditoria de transbordo), onde está cada registro, o que não roda mais.
+- `STATUS.md`: patch publicado 0.0.17; problema 8 com o resultado de `work/ui/auditoria_transbordo_0.0.17.md`
+  (mensagens do cartão de memória com 85–100 letras num widget de 80, `menu3055` #25 e #32 acima de 32, ~45
+  prováveis); teste do cartão de memória na lista; campanha 6.865 linhas (com a `m6041`). Seção "What to test" sem
+  a versão no título (os links `#what-to-test` dos outros guias voltam a funcionar).
+- README com resumo em português; INSTALL_PATCH, BUILD_FROM_SOURCE, GLORIOUS_OPENING, MAKE_YOUR_OWN_*,
+  TECHNICAL_REFERENCE com os números e SHA da 0.0.17.
+- **Não corrigido ainda:** as linhas da auditoria de transbordo. É o primeiro item da 0.0.18.
+
+## 0.0.17 — 2026-10-23 (teste interno)
+
+- **Relato do teste da 0.0.16:** na Op 4, textos da missão e falas de piloto em japonês. Conferido na ISO 0.0.16
+  (SHA `888f11d1…`): briefing 63003, táticos 63043–63045, debriefing 63171, relatório 63208 e o diálogo das missões
+  6042/6043 estavam em inglês. **A missão 04-01 inteira (contêineres 6041/42041) estava em japonês:** objetivo,
+  contador, rádio de abertura, todas as falas e "制限時間超過". Os nomes de alvo da 04-02 (ザクⅡ, ダウツェン,
+  ＧＰ０２) também.
+- **Causa 1 (`is_packed`, falso positivo):** na 6041 a lista A está vazia (`+8` = 0), e o cabeçalho
+  `00 01 00 00 … 00 00 00 00` é idêntico à assinatura LZSS. O `mission_table` recusava o recurso como comprimido, o
+  `try_unpack` falhava e o `textdb` pulava o recurso inteiro: nunca exportado, nunca em lote, nunca no build.
+  - Correção: a assinatura só vale se o tamanho declarado (BE em `+4`) couber em 8× o recurso, porque o LZSS gera no
+    máximo 128 bytes a cada 17 lidos. Os falsos positivos declaravam de 268 MB a 1,3 GB.
+  - Na base inteira, só 203, 6041, 42041 e 6907 mudam de classe. Os outros 754 recursos comprimidos continuam iguais.
+  - `is_packed(data, size)` aceita o tamanho do recurso quando só se tem o começo dele (`crash_watch.py`).
+- **Causa 2 (`small_tables` e `patch_mission`, lista A):** liam os registros de `+8` até `+12`. Com a lista B vazia
+  (`+12` = 0), não liam nada. Agora usam o contador do byte `+28` (`ace2lib.list_a`). É o "achado à parte" do ESTUDO
+  8.6, item 0.
+- **Causa 3 (contêiner sem diálogo):** 43 contêineres têm só a lista A (`+20` = 0): 6014–6016, 6030, 6034,
+  6036–6039, 6050, 6330–6337, 6362, 6904, 6925, 6970, 6971, 6999 e gêmeos. O `_walk` só lia subtabelas quando havia
+  diálogo. Agora `ace2lib.mission_container()` reconhece o contêiner com ou sem diálogo e é usado no `textdb`, no
+  `audit_iso` e nos testes. `mission_text_bytes` e `patch_mission` aceitam a falta de diálogo.
+- `mission_fields` aceita cabeçalho sem lista A (o tamanho do cabeçalho vem da primeira lista não vazia). Nos 244
+  contêineres já aceitos, a lista de campos não muda. `mission_relayout` deixa como está um `+4` "tamanho" igual a
+  0 (6904, 6999).
+- **Descoberta agora:** 204 contêineres com diálogo (com 6041, 42041 e 6907) + 43 sem diálogo, com 786 subtabelas
+  de nomes. O código da 0.0.16 lia 201 contêineres e 442 subtabelas: 125 contêineres ganharam 344 tabelas de nomes
+  de alvo.
+  - Tabelas novas: `m6041` (43 linhas, cópias 6041 e 42041) e `m6907` (3 linhas; missão extra da Nadesico).
+  - `unit_names`: 89 → 120 linhas. Os nomes que já existiam chegam sozinhos às cópias novas (as linhas são chaveadas
+    pelo japonês).
+- **Traduzido pelo Claude** (`_fill` à mão):
+  - `m6041`: 38 falas novas; as outras 5 repetem o inglês já usado (objetivo "Destroy 10+ Chulips", igual à
+    `menu3056`; "Time Limit Exceeded"; "%d units"; "No enemy signatures in the area."; "No choice... Fall back for
+    now!").
+  - Contador "Chulips Destroyed：999 units" = 27 letras.
+  - As linhas 300–314 são anotações de desenvolvimento ("作戦の補足", "バニングの喝"…) e ficaram entre parênteses, como as
+    da `m6042`.
+  - `m6907`: "Destroy all Batta", "Nadesico sunk" e uma fala.
+  - 31 nomes de alvo novos pelo glossário (Nu Gundam, Devil Gundam, Gundam Head, Dankova, Zakaal, Geara Doga,
+    Aestivalis (Ryoko/Hikaru/Izumi), VF-1A (Hikaru)…).
+  - "ガンダムデスサイズヘル" ficou **"Deathscythe Hell"**: com o "Gundam" daria 243 px, acima da maior linha
+    japonesa da tabela (225 px).
+  - Quatro falas da 6041 acima de 380 px foram encurtadas ou quebradas em duas linhas. `merge_fill`: 0 linha larga
+    nas três tabelas.
+- **Cuidado do processo:** o `_fill/unit_names.json` é indexado pela posição da linha, e o `export_text` inseriu as
+  linhas novas no meio (a ordem é a do japonês). O fill foi remapeado pelo japonês: índice antigo → japonês → índice
+  novo. Nenhuma referência `unit_names#` em `auto/`, `reviewer_fixes.json` ou `width_waivers.json`. O
+  `glossary.py --write`, que gerava esse fill, depende de `D:\Ace 1` e não roda mais.
+- `operations.py` regenerado: a Op 4 agora tem `m6041` (222 linhas). A lista `shared` passou a mostrar as tabelas
+  `partnerNNN` (o arquivo não era regenerado desde a 0.0.14).
+- Testes: `test_identity.py` PASS (com a regravação sem edição dos contêineres sem diálogo) e `test_textdb.py` PASS
+  (786 subtabelas, 651 recursos, sem bytes mortos, inclusive nos contêineres sem diálogo).
+- **Memória:** 128 recursos diferentes da 0.0.16, todos contêineres de missão. 6041 e 42041: +384 bytes cada.
+  6907: +0. Os demais variam de −16 a +16 (nomes em inglês às vezes ocupam menos que o japonês). Total +128 bytes
+  em relação à 0.0.16.
+  - Na auditoria: 247 contêineres regravados, o maior crescimento continua sendo +800 (6010), total −12.048 bytes
+    (eram −12.176). Parceiros sem mudança (+512 no máximo).
+- `audit_iso.py` passou: 651 recursos, 1.741 locais de texto (eram 1.394). SHA-256
+  `33fad6e583aa305123afbf4e2d6c41f6b110d6ad395cc32789d87369e2300a8d`.
+- Conferido na ISO 0.0.17: todas as tabelas da Op 4 (briefings, 6041/42041, 6042/42042 com os três nomes,
+  6043/42043, debriefing, relatório) sem nenhuma linha em japonês.
+- Fontes idênticas às da 0.0.16 (pacotes 38000–38006 e 62050–62057 byte a byte).
+- **Achado à parte (não corrigido):** a segunda tabela do contêiner (`+24`) guarda os nomes de objeto e alvo no HUD
+  e não é extraída. São 76 contêineres, 116 linhas e 41 nomes únicos em japonês, por exemplo チューリップ (6041,
+  6101, 6172), ソーラー施設 (6111, o "achado à parte" da 0.0.16), ギガノス基地, ランチゲート, カトンボ. Na
+  própria 4-1, o alvo travado ainda aparece como "チューリップ".
+- **Para testar:** a Op 04-01 inteira (falas, contador, fim por tempo) e os nomes de alvo da 04-02. Se der, uma
+  missão de Free Mission ou extra (6330–6362, 6904, 6970) para ver os nomes. Usar `crash_watch.bat`, que agora
+  aponta para a 0.0.17.
+
 ## Patch 0.0.16 publicado — 2026-10-17 (sem build nova)
 
 - `make_patch.py --version 0.0.16` com o xdelta3 3.0.11 oficial (nesta máquina em

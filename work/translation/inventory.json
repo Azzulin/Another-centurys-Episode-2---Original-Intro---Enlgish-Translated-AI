@@ -1302,6 +1302,13 @@
    "translated": 108,
    "copies": 2
   },
+  "m6041": {
+   "kind": "mission",
+   "rows": 43,
+   "chars": 1758,
+   "translated": 0,
+   "copies": 2
+  },
   "m6042": {
    "kind": "mission",
    "rows": 50,
@@ -1946,6 +1953,13 @@
    "translated": 4,
    "copies": 1
   },
+  "m6907": {
+   "kind": "mission",
+   "rows": 3,
+   "chars": 60,
+   "translated": 0,
+   "copies": 1
+  },
   "m6998": {
    "kind": "mission",
    "rows": 5,
@@ -2265,764 +2279,764 @@
    "kind": "mission",
    "rows": 59,
    "chars": 2214,
-   "translated": 0,
+   "translated": 59,
    "copies": 2
   },
   "partner021": {
    "kind": "mission",
    "rows": 59,
    "chars": 2214,
-   "translated": 0,
+   "translated": 59,
    "copies": 2
   },
   "partner022": {
    "kind": "mission",
    "rows": 55,
    "chars": 2258,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner023": {
    "kind": "mission",
    "rows": 59,
    "chars": 2216,
-   "translated": 0,
+   "translated": 59,
    "copies": 2
   },
   "partner024": {
    "kind": "mission",
    "rows": 59,
    "chars": 2216,
-   "translated": 0,
+   "translated": 59,
    "copies": 2
   },
   "partner025": {
    "kind": "mission",
    "rows": 55,
    "chars": 2258,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner031": {
    "kind": "mission",
    "rows": 57,
    "chars": 2195,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner033": {
    "kind": "mission",
    "rows": 57,
    "chars": 2328,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner035": {
    "kind": "mission",
    "rows": 55,
    "chars": 2194,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner037": {
    "kind": "mission",
    "rows": 72,
    "chars": 2978,
-   "translated": 0,
+   "translated": 72,
    "copies": 2
   },
   "partner039": {
    "kind": "mission",
    "rows": 54,
    "chars": 2227,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner041": {
    "kind": "mission",
    "rows": 63,
    "chars": 2585,
-   "translated": 0,
+   "translated": 63,
    "copies": 2
   },
   "partner050": {
    "kind": "mission",
    "rows": 58,
    "chars": 2197,
-   "translated": 0,
+   "translated": 58,
    "copies": 2
   },
   "partner051": {
    "kind": "mission",
    "rows": 58,
    "chars": 2197,
-   "translated": 0,
+   "translated": 58,
    "copies": 2
   },
   "partner052": {
    "kind": "mission",
    "rows": 25,
    "chars": 965,
-   "translated": 0,
+   "translated": 25,
    "copies": 2
   },
   "partner060": {
    "kind": "mission",
    "rows": 52,
    "chars": 1988,
-   "translated": 0,
+   "translated": 52,
    "copies": 2
   },
   "partner062": {
    "kind": "mission",
    "rows": 57,
    "chars": 2192,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner064": {
    "kind": "mission",
    "rows": 55,
    "chars": 2086,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner065": {
    "kind": "mission",
    "rows": 49,
    "chars": 1917,
-   "translated": 0,
+   "translated": 49,
    "copies": 2
   },
   "partner066": {
    "kind": "mission",
    "rows": 57,
    "chars": 2192,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner070": {
    "kind": "mission",
    "rows": 78,
    "chars": 2969,
-   "translated": 0,
+   "translated": 78,
    "copies": 2
   },
   "partner072": {
    "kind": "mission",
    "rows": 78,
    "chars": 2969,
-   "translated": 0,
+   "translated": 78,
    "copies": 2
   },
   "partner073": {
    "kind": "mission",
    "rows": 64,
    "chars": 2579,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner074": {
    "kind": "mission",
    "rows": 13,
    "chars": 553,
-   "translated": 0,
+   "translated": 13,
    "copies": 2
   },
   "partner075": {
    "kind": "mission",
    "rows": 64,
    "chars": 2579,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner076": {
    "kind": "mission",
    "rows": 64,
    "chars": 2579,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner078": {
    "kind": "mission",
    "rows": 66,
    "chars": 2474,
-   "translated": 0,
+   "translated": 66,
    "copies": 2
   },
   "partner080": {
    "kind": "mission",
    "rows": 78,
    "chars": 2969,
-   "translated": 0,
+   "translated": 78,
    "copies": 2
   },
   "partner097": {
    "kind": "mission",
    "rows": 63,
    "chars": 2491,
-   "translated": 0,
+   "translated": 63,
    "copies": 2
   },
   "partner098": {
    "kind": "mission",
    "rows": 55,
    "chars": 2219,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner099": {
    "kind": "mission",
    "rows": 65,
    "chars": 2559,
-   "translated": 0,
+   "translated": 65,
    "copies": 2
   },
   "partner100": {
    "kind": "mission",
    "rows": 63,
    "chars": 2491,
-   "translated": 0,
+   "translated": 63,
    "copies": 2
   },
   "partner101": {
    "kind": "mission",
    "rows": 63,
    "chars": 2491,
-   "translated": 0,
+   "translated": 63,
    "copies": 2
   },
   "partner102": {
    "kind": "mission",
    "rows": 55,
    "chars": 2219,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner103": {
    "kind": "mission",
    "rows": 55,
    "chars": 2219,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner104": {
    "kind": "mission",
    "rows": 65,
    "chars": 2559,
-   "translated": 0,
+   "translated": 65,
    "copies": 2
   },
   "partner105": {
    "kind": "mission",
    "rows": 65,
    "chars": 2559,
-   "translated": 0,
+   "translated": 65,
    "copies": 2
   },
   "partner106": {
    "kind": "mission",
    "rows": 68,
    "chars": 2833,
-   "translated": 0,
+   "translated": 68,
    "copies": 2
   },
   "partner107": {
    "kind": "mission",
    "rows": 72,
    "chars": 2824,
-   "translated": 0,
+   "translated": 72,
    "copies": 2
   },
   "partner109": {
    "kind": "mission",
    "rows": 65,
    "chars": 2628,
-   "translated": 0,
+   "translated": 65,
    "copies": 2
   },
   "partner110": {
    "kind": "mission",
    "rows": 47,
    "chars": 1644,
-   "translated": 0,
+   "translated": 47,
    "copies": 2
   },
   "partner111": {
    "kind": "mission",
    "rows": 47,
    "chars": 1644,
-   "translated": 0,
+   "translated": 47,
    "copies": 2
   },
   "partner112": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner113": {
    "kind": "mission",
    "rows": 54,
    "chars": 2039,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner114": {
    "kind": "mission",
    "rows": 51,
    "chars": 1941,
-   "translated": 0,
+   "translated": 51,
    "copies": 2
   },
   "partner115": {
    "kind": "mission",
    "rows": 58,
    "chars": 2138,
-   "translated": 0,
+   "translated": 58,
    "copies": 2
   },
   "partner116": {
    "kind": "mission",
    "rows": 12,
    "chars": 458,
-   "translated": 0,
+   "translated": 12,
    "copies": 2
   },
   "partner120": {
    "kind": "mission",
    "rows": 58,
    "chars": 2270,
-   "translated": 0,
+   "translated": 58,
    "copies": 2
   },
   "partner122": {
    "kind": "mission",
    "rows": 61,
    "chars": 2405,
-   "translated": 0,
+   "translated": 61,
    "copies": 2
   },
   "partner124": {
    "kind": "mission",
    "rows": 61,
    "chars": 2405,
-   "translated": 0,
+   "translated": 61,
    "copies": 2
   },
   "partner126": {
    "kind": "mission",
    "rows": 61,
    "chars": 2423,
-   "translated": 0,
+   "translated": 61,
    "copies": 2
   },
   "partner127": {
    "kind": "mission",
    "rows": 60,
    "chars": 2311,
-   "translated": 0,
+   "translated": 60,
    "copies": 2
   },
   "partner130": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner131": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner132": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner133": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner134": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner135": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner136": {
    "kind": "mission",
    "rows": 50,
    "chars": 2073,
-   "translated": 0,
+   "translated": 50,
    "copies": 2
   },
   "partner137": {
    "kind": "mission",
    "rows": 50,
    "chars": 2073,
-   "translated": 0,
+   "translated": 50,
    "copies": 2
   },
   "partner138": {
    "kind": "mission",
    "rows": 54,
    "chars": 2090,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner139": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner140": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner141": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner142": {
    "kind": "mission",
    "rows": 67,
    "chars": 2646,
-   "translated": 0,
+   "translated": 67,
    "copies": 2
   },
   "partner145": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner146": {
    "kind": "mission",
    "rows": 57,
    "chars": 2308,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner147": {
    "kind": "mission",
    "rows": 57,
    "chars": 2306,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner148": {
    "kind": "mission",
    "rows": 57,
    "chars": 2306,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner149": {
    "kind": "mission",
    "rows": 57,
    "chars": 2306,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner150": {
    "kind": "mission",
    "rows": 53,
    "chars": 2090,
-   "translated": 0,
+   "translated": 53,
    "copies": 2
   },
   "partner151": {
    "kind": "mission",
    "rows": 53,
    "chars": 2090,
-   "translated": 0,
+   "translated": 53,
    "copies": 2
   },
   "partner152": {
    "kind": "mission",
    "rows": 53,
    "chars": 2090,
-   "translated": 0,
+   "translated": 53,
    "copies": 2
   },
   "partner153": {
    "kind": "mission",
    "rows": 53,
    "chars": 2090,
-   "translated": 0,
+   "translated": 53,
    "copies": 2
   },
   "partner154": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner155": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner156": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner157": {
    "kind": "mission",
    "rows": 64,
    "chars": 2505,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner158": {
    "kind": "mission",
    "rows": 54,
    "chars": 2039,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner159": {
    "kind": "mission",
    "rows": 54,
    "chars": 2039,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner160": {
    "kind": "mission",
    "rows": 54,
    "chars": 2039,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner161": {
    "kind": "mission",
    "rows": 54,
    "chars": 2039,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner162": {
    "kind": "mission",
    "rows": 51,
    "chars": 1941,
-   "translated": 0,
+   "translated": 51,
    "copies": 2
   },
   "partner163": {
    "kind": "mission",
    "rows": 51,
    "chars": 1941,
-   "translated": 0,
+   "translated": 51,
    "copies": 2
   },
   "partner164": {
    "kind": "mission",
    "rows": 51,
    "chars": 1941,
-   "translated": 0,
+   "translated": 51,
    "copies": 2
   },
   "partner165": {
    "kind": "mission",
    "rows": 51,
    "chars": 1941,
-   "translated": 0,
+   "translated": 51,
    "copies": 2
   },
   "partner166": {
    "kind": "mission",
    "rows": 54,
    "chars": 2395,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner167": {
    "kind": "mission",
    "rows": 54,
    "chars": 2395,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner168": {
    "kind": "mission",
    "rows": 54,
    "chars": 2395,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner169": {
    "kind": "mission",
    "rows": 54,
    "chars": 2395,
-   "translated": 0,
+   "translated": 54,
    "copies": 2
   },
   "partner170": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner171": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner172": {
    "kind": "mission",
    "rows": 57,
    "chars": 2252,
-   "translated": 0,
+   "translated": 57,
    "copies": 2
   },
   "partner173": {
    "kind": "mission",
    "rows": 56,
    "chars": 2200,
-   "translated": 0,
+   "translated": 56,
    "copies": 2
   },
   "partner174": {
    "kind": "mission",
    "rows": 64,
    "chars": 2605,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner175": {
    "kind": "mission",
    "rows": 64,
    "chars": 2605,
-   "translated": 0,
+   "translated": 64,
    "copies": 2
   },
   "partner176": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner177": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner178": {
    "kind": "mission",
    "rows": 50,
    "chars": 1955,
-   "translated": 0,
+   "translated": 50,
    "copies": 2
   },
   "partner179": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner180": {
    "kind": "mission",
    "rows": 55,
    "chars": 2107,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner190": {
    "kind": "mission",
    "rows": 55,
    "chars": 2338,
-   "translated": 0,
+   "translated": 55,
    "copies": 2
   },
   "partner200": {
    "kind": "mission",
    "rows": 48,
    "chars": 1925,
-   "translated": 0,
+   "translated": 48,
    "copies": 2
   },
   "partner201": {
    "kind": "mission",
    "rows": 56,
    "chars": 1967,
-   "translated": 0,
+   "translated": 56,
    "copies": 2
   },
   "partner202": {
    "kind": "mission",
    "rows": 56,
    "chars": 1966,
-   "translated": 0,
+   "translated": 56,
    "copies": 2
   },
   "partner220": {
    "kind": "mission",
    "rows": 47,
    "chars": 1751,
-   "translated": 0,
+   "translated": 47,
    "copies": 2
   },
   "partner221": {
    "kind": "mission",
    "rows": 27,
    "chars": 1013,
-   "translated": 0,
+   "translated": 27,
    "copies": 2
   },
   "partner_names": {
    "kind": "unit_names",
    "rows": 51,
    "chars": 165,
-   "translated": 0,
+   "translated": 51,
    "copies": 246
   },
   "unit_names": {
    "kind": "unit_names",
-   "rows": 89,
-   "chars": 545,
+   "rows": 120,
+   "chars": 795,
    "translated": 89,
-   "copies": 442
+   "copies": 786
   }
  },
  "totals": {
@@ -3045,10 +3059,10 @@
    "translated": 256
   },
   "mission": {
-   "tables": 213,
-   "rows": 12721,
-   "chars": 511712,
-   "translated": 6583
+   "tables": 215,
+   "rows": 12767,
+   "chars": 513530,
+   "translated": 12721
   },
   "menu": {
    "tables": 44,
@@ -3058,9 +3072,9 @@
   },
   "unit_names": {
    "tables": 2,
-   "rows": 140,
-   "chars": 710,
-   "translated": 89
+   "rows": 171,
+   "chars": 960,
+   "translated": 140
   }
  }
 }

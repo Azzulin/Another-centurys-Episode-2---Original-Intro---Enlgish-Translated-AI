@@ -59,9 +59,9 @@ sections hold no container offsets, which is what allows a table to grow in plac
 | Gameplay HUD | bundles `38000–38006` (inner `3013`, `3020`, `3021`, `3024`) | 256 |
 | System windows | `8031` (+ copies in `8033`, `60000`) | 8 |
 
-In total 1,394 text locations, grouped into 432 logical tables. Not in text tables: the enemy-name lists of 82
-mission containers that the extractor does not read yet (list A without a list B after it), a few textures with
-Japanese, the memory-card save title in the executable, the movies ([STATUS.md](STATUS.md#not-translated-yet)).
+In total 1,741 text locations, grouped into 434 logical tables. Not extracted yet: the second table of 76 mission
+containers (offset `+24`: object and target names on the HUD, 116 rows), a few textures with Japanese, the
+memory-card save title in the executable, the movies ([STATUS.md](STATUS.md#not-translated-yet)).
 
 ### Control codes
 
@@ -89,8 +89,8 @@ The arena allocator (state at `0x00345040`) allocates bottom-up, takes one block
 request does not fit; the game never checks. A mission loads its container whole, and the partner packages stay
 resident during the mission, so **no resident resource may carry dead bytes**: each table is rebuilt where the
 Japanese one was (`ace2lib.mission_relayout`, `vmd_replace`), and `audit_iso.py` fails a mission container that grows
-more than its text tables. In 0.0.16 the largest mission container grows +800 bytes (6010), all of them together
-−12,176 bytes, partner packages at most +512 bytes; the arena has 256 KB more than the original.
+more than its text tables. In 0.0.17 the largest mission container grows +800 bytes (6010), all of them together
+−12,048 bytes, partner packages at most +512 bytes; the arena has 256 KB more than the original.
 
 ### Text widgets
 
@@ -156,7 +156,7 @@ the files after it move by `DATA.BIN`'s growth, absorbed by the empty disc tail,
 ISO9660 records (both endians) and UDF file entries (with descriptor CRC and checksum) are rewritten; whole-file
 swaps from another image (the movie) are copied in, and a file can be replaced by new bytes of the same size (the
 executable). The output is re-read and every extent, every file payload and every changed resource is verified before
-it returns. In 0.0.16 `DATA.BIN` grows 778,240 bytes and 20.2 MB of the disc tail stay free.
+it returns. In 0.0.17 `DATA.BIN` grows 778,240 bytes and 20.2 MB of the disc tail stay free.
 
 `tools/ace2/textdb.py`: discovers **all** tables on the disc (walking binders, LZSS payloads and `VMD` chunk chains
 recursively), groups copies, and writes them back. Location strings: `6012:m` (dialogue table of mission container

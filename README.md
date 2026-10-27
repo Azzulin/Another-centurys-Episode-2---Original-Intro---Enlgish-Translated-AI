@@ -3,10 +3,11 @@
 A fan translation of **Another Century's Episode 2 — Special Vocal Version** (PS2, Japan, SLPS-25829) into English,
 plus a tool that puts the **original 2006 opening movie with the song "Glorious"** back on the Special Vocal Version.
 
-> **Status: test builds (0.0.x).** Every text table of the game is in English: the campaign (6,822 lines), the
+> **Status: test builds (0.0.x).** Every text table found so far is in English: the campaign (6,865 lines), the
 > partners' battle chatter (6,138), menus (2,171), extra missions, tutorial, HUD and names. The latest build,
-> **0.0.16**, fixes the freezes found so far, is being tested in game and is published as an xdelta patch
-> (pre-release) under [Releases](../../releases). Read [docs/STATUS.md](docs/STATUS.md) before playing.
+> **0.0.17**, fixes the freezes found so far and translates Operation 04-01, which was still in Japanese in 0.0.16.
+> It is published as an xdelta patch (pre-release) under [Releases](../../releases) and is waiting for in-game
+> testing. Read [docs/STATUS.md](docs/STATUS.md) before playing.
 
 This repository contains **no game data**. You need your own copy of the game. Patches are published under
 [Releases](../../releases); the tools here rebuild everything from your own discs.
@@ -15,15 +16,30 @@ This repository contains **no game data**. You need your own copy of the game. P
 
 | I want to… | Read |
 |---|---|
-| Play the English version (0.0.16): apply the patch to my ISO (no programming) | [docs/INSTALL_PATCH.md](docs/INSTALL_PATCH.md) |
+| Play the English version (0.0.17): apply the patch to my ISO (no programming) | [docs/INSTALL_PATCH.md](docs/INSTALL_PATCH.md) |
 | Build the ISO myself from my own disc and this repository | [docs/BUILD_FROM_SOURCE.md](docs/BUILD_FROM_SOURCE.md) |
 | Get the "Glorious" opening on my Special Vocal Version (English **or** untouched Japanese) | [docs/GLORIOUS_OPENING.md](docs/GLORIOUS_OPENING.md) |
 | Fix or change the English text, or make my own translation (and my own ISO) | [docs/MAKE_YOUR_OWN_TRANSLATION.md](docs/MAKE_YOUR_OWN_TRANSLATION.md) |
 | Make an xdelta patch of my own build and share it (my own GitHub release) | [docs/MAKE_YOUR_OWN_PATCH.md](docs/MAKE_YOUR_OWN_PATCH.md) |
 | Understand how the AI translation was produced and reviewed | [docs/AI_TRANSLATION_WORKFLOW.md](docs/AI_TRANSLATION_WORKFLOW.md) |
 | Know the file formats, the memory limits and how the disc is rebuilt | [docs/TECHNICAL_REFERENCE.md](docs/TECHNICAL_REFERENCE.md) |
+| Take over the project and continue it, or start my own from where it stopped | [docs/TAKING_OVER.md](docs/TAKING_OVER.md) |
 | Publish a release or update this repository (maintainers) | [docs/RELEASING.md](docs/RELEASING.md) |
 | See what is done, what is broken, what is left | [docs/STATUS.md](docs/STATUS.md), [CHANGELOG.md](CHANGELOG.md) |
+
+### Em português (resumo)
+
+- **Jogar:** baixe `ACE2-EN-<versão>.xdelta` em [Releases](../../releases), confira o SHA-256 da sua ISO da Special
+  Vocal Version (`efd791e7…941741`), aplique com o Delta Patcher ou com
+  `xdelta3 -d -s "<sua ISO>.iso" ACE2-EN-<versão>.xdelta ACE2-EN-<versão>.iso` e confira o SHA-256 do resultado no
+  arquivo `ACE2-EN-<versão>-SHA256.txt`. O patch vale só para a ISO original intacta, nunca por cima de um patch
+  anterior. Passo a passo (em inglês, com comandos para Windows, Linux e macOS):
+  [docs/INSTALL_PATCH.md](docs/INSTALL_PATCH.md).
+- **Abertura "Glorious":** precisa também da ISO de 2006 e do `swap_movie.py`
+  ([docs/GLORIOUS_OPENING.md](docs/GLORIOUS_OPENING.md)).
+- **Continuar o projeto ou fazer a sua tradução:** [docs/TAKING_OVER.md](docs/TAKING_OVER.md) e
+  [docs/MAKE_YOUR_OWN_TRANSLATION.md](docs/MAKE_YOUR_OWN_TRANSLATION.md). As notas de trabalho mais detalhadas
+  estão em português: [docs/ESTUDO_ACE2.md](docs/ESTUDO_ACE2.md) (seção 8) e [docs/CHANGELOG.md](docs/CHANGELOG.md).
 
 ## The two discs
 
@@ -39,8 +55,8 @@ The Special Vocal Version replaced the opening song. Both discs store the openin
 
 ## How the translation was made (short version)
 
-- The game's text was extracted from scratch from the Special Vocal Version: 432 text tables (1,394 locations on
-  the disc), 16,884 lines, including the partners' battle chatter stored inside their 3D model packages.
+- The game's text was extracted from scratch from the Special Vocal Version: 434 text tables (1,741 locations on
+  the disc), 16,961 lines, including the partners' battle chatter stored inside their 3D model packages.
 - An external AI translator translated 150 batches of 80 lines in play order, with a
   glossary, per-series voice notes and the surrounding lines as context. It only ever wrote its answers to one
   folder.
@@ -63,7 +79,8 @@ README.md, CHANGELOG.md     this file; release history in English
 docs/*.md (English names)   English guides (this repo's documentation)
 docs/ESTUDO_ACE2.md, docs/CHANGELOG.md, docs/RETOMADA.md, docs/REVISAO_PARALELA.md
                             the original working notes in Portuguese (the most detailed record of every decision)
-AGENTS.md                   rules for AI assistants working in this folder (Portuguese)
+AGENTS.md, CLAUDE.md        rules and commands for AI assistants working in this folder (Portuguese; Claude Code
+                            reads both automatically)
 requirements.txt            Python packages (numpy, pillow, pycdlib)
 tools/ace2/                 the pipeline: extraction, fonts, validation, executable patch, build, audit, movie swap,
                             release patch

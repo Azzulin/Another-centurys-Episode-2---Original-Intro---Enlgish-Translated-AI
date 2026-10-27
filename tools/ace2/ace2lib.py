@@ -8,8 +8,10 @@ Containers
   inner binder             'BND\\0' | +4 size | +8 count | (id, offset) pairs @16, payloads 32-aligned
   packed                   ACE3 LZSS: 00 01 00 00 | unpacked size BE | 0 | body
   text table               magic 0x10000, size, 0, ranges, count, pointer array, 0 | ranges | pointers | CP932 pool
-  mission container        00 01 00 00 | +4 list C (or total size) | +8 list A | +12 list B | +16 list D | +20 dialogue
-                           table | +24 second table | +28 counts A, B, D, C (bytes) | +32 last section (48-byte header)
+  mission container        00 01 00 00 | +4 list C (or total size, or 0) | +8 list A | +12 list B | +16 list D | +20
+                           dialogue table | +24 second table | +28 counts A, B, D, C (bytes) | +32 last section
+                           (48-byte header); an empty list has offset 0 (+8 = 0 gives the LZSS signature: is_packed)
+                           and 43 containers have no dialogue table (+20 = 0), only list A
                            lists A, B, D: 16-byte records (id, offset, 0, 0); list A = enemy-name sub-tables
                            list C: (id, name table, 256x128 portrait image, 0)
                            Sections hold no container offsets (twins 6### / 42### carry them byte-identical at other
@@ -188,8 +190,12 @@ PACK_MAGIC = b'\x00\x01\x00\x00'
 WINDOW, MAX_LEN = 4096, 16
 
 
-def is_packed(data):
-    return len(data) >= 12 and data[:4] == PACK_MAGIC and data[8:12] == b'\0\0\0\0'
+def is_packed(data, size=None):
+    """LZSS signature with a size the stream can produce (size = whole resource when data is only its head). LZSS
+    writes at most 8 x 16 bytes per 17 input bytes; a larger declared size is a mission container whose list A is
+    empty (+8 = 0, same signature): Op 04-01 (6041/42041) and 6907 went untranslated through 0.0.16."""
+    return len(data) >= 12 and data[:4] == PACK_MAGIC and data[8:12] == b'\0\0\0\0' and \
+        struct.unpack('>I', data[4:8])[0] <= 8 * (len(data) if size is None else size)
 
 
 def unpack(data):
@@ -319,11 +325,13 @@ def mission_table(data):
 
 def mission_fields(data):
     """Positions of the words of a mission container that hold an offset ('off') or its total size ('size').
-    Two header layouts: lists from 0x20 (+4 = total size when there is no list C) or from 0x30 (+32 = last section)."""
+    Two header layouts: lists from 0x20 (+4 = total size when there is no list C) or from 0x30 (+32 = last section).
+    The first list starts right after the header; list A may be empty (+8 = 0: 6041, 42041, 6907)."""
     h = struct.unpack_from('<9I', data)
     counts = data[28:32]
-    require(h[2] in (0x20, 0x30), 'Unknown mission container header')
-    short = h[2] == 0x20
+    first = min([v for v in h[2:5] if v] + ([h[1]] if counts[3] else []), default=0)
+    require(first in (0x20, 0x30), 'Unknown mission container header')
+    short = first == 0x20
     fields = [(4, 'size' if short and not counts[3] else 'off')] + [(at, 'off') for at in (8, 12, 16, 20, 24)]
     if not short:
         fields.append((32, 'off'))
@@ -367,7 +375,7 @@ def mission_relayout(data, replace):
     patched = set()
     for at, kind in fields:
         v = u32(data, at)
-        if kind == 'size':
+        if kind == 'size' and v:                 # 0 in some containers without dialogue (6904, 6999)
             require(v == len(data), 'Mission container size field mismatch')
             struct.pack_into('<I', out, move(at), len(out))
         elif v:
@@ -428,21 +436,39 @@ def vmd_replace(data, magic, fn):
     return out
 
 
+def mission_container(data):
+    """True for a mission container, with or without a dialogue table (6036, 6330-6336, 6362, 6925, 6970 and twins
+    hold enemy names only, +20 = 0)."""
+    if data[:4] != b'\0\1\0\0' or len(data) < 48 or is_packed(data):
+        return False
+    try:
+        mission_fields(data)
+    except (ValueError, struct.error):
+        return False
+    return bool(mission_table(data) or small_tables(data))
+
+
 def mission_text_bytes(data):
     """Bytes taken by the dialogue table and the enemy-name sub-tables of a mission container. A rebuilt container
     must grow exactly by the growth of this number (no dead tables left in the game's memory arena)."""
-    at, t = mission_table(data)
-    sizes = {at: t.size}
+    mt = mission_table(data)
+    sizes = {mt[0]: mt[1].size} if mt else {}
     sizes.update((off, st.size) for sid, off, st in small_tables(data))
     return sum(sizes.values())
 
 
+def list_a(data):
+    """(id, offset) records of list A of a mission container: the first at +8, their count in byte +28. Reading up
+    to +12 instead (through 0.0.16) found nothing whenever list B is empty (+12 = 0): 96 containers kept their enemy
+    names in Japanese."""
+    first = u32(data, 8)
+    return [struct.unpack_from('<II', data, first + 16 * i) for i in range(data[28] if first else 0)]
+
+
 def small_tables(data):
-    """Sub-tables listed in a mission container header (id, offset) records from +8..+12 (e.g. enemy names)."""
-    first, end = u32(data, 8), u32(data, 12)
+    """Sub-tables of list A of a mission container (enemy names on the lock-on HUD)."""
     out = []
-    for at in range(first, end, 16):
-        sid, off = struct.unpack_from('<II', data, at)
+    for sid, off in list_a(data):
         try:
             out.append((sid, off, TextTable(data[off:])))
         except (ValueError, UnicodeError, struct.error):

@@ -1,0 +1,311 @@
+{
+ "table": "m6041",
+ "kind": "mission",
+ "copies": [
+  "42041:m",
+  "6041:m"
+ ],
+ "rows": [
+  {
+   "ids": [
+    1
+   ],
+   "jp": "チューリップを１０機以上破壊",
+   "en": "Destroy 10+ Chulips"
+  },
+  {
+   "ids": [
+    2
+   ],
+   "jp": "制限時間超過",
+   "en": "Time Limit Exceeded"
+  },
+  {
+   "ids": [
+    10
+   ],
+   "jp": "チューリップ撃破数",
+   "en": "Chulips Destroyed"
+  },
+  {
+   "ids": [
+    11
+   ],
+   "jp": "%d機",
+   "en": "%d units"
+  },
+  {
+   "ids": [
+    51
+   ],
+   "jp": "<op()><sp(20)>あのでかいのが、敵を吐き出しているのか。<ab(600)><ed()>",
+   "en": "<op()><sp(20)>So that big thing is what's spitting out\nthe enemies?<ab(600)><ed()>"
+  },
+  {
+   "ids": [
+    52
+   ],
+   "jp": "<op()><sp(20)>チューリップとはふざけた名前だな！<ab(600)><ed()>",
+   "en": "<op()><sp(20)>Chulip? What a ridiculous name!<ab(600)><ed()>"
+  },
+  {
+   "ids": [
+    55
+   ],
+   "jp": "<op()><sp(20)>どんどん来るぞ！　叩き落せ！<ab(500)><ed()>",
+   "en": "<op()><sp(20)>They just keep coming!\nShoot them down!<ab(500)><ed()>"
+  },
+  {
+   "ids": [
+    61
+   ],
+   "jp": "<op()><sp(20)>これだけやれば進路は確保できるだろう。<ab(400)><ed()>",
+   "en": "<op()><sp(20)>That should be enough to secure our\nroute.<ab(400)><ed()>"
+  },
+  {
+   "ids": [
+    62
+   ],
+   "jp": "<op()><sp(20)>あとはできる限り破壊してくれ。<ab(500)><ed()>",
+   "en": "<op()><sp(20)>Now destroy as many as you can.<ab(500)><ed()>"
+  },
+  {
+   "ids": [
+    65
+   ],
+   "jp": "<op()><sp(20)>この数は反則ですよ！<ab(200)><ed()>",
+   "en": "<op()><sp(20)>These numbers just aren't fair!<ab(200)><ed()>"
+  },
+  {
+   "ids": [
+    71
+   ],
+   "jp": "<op()><sp(20)>周辺に敵影なし。<ab(200)><ed()>",
+   "en": "<op()><sp(20)>No enemy signatures in the area.<ab(200)><ed()>"
+  },
+  {
+   "ids": [
+    72
+   ],
+   "jp": "<op()><sp(20)>よくやった、攻撃隊を補給に戻せ。<ab(600)><ed()>",
+   "en": "<op()><sp(20)>Well done. Send the strike team back\nto resupply.<ab(600)><ed()>"
+  },
+  {
+   "ids": [
+    75
+   ],
+   "jp": "<op()><sp(20)>よし、本艦は前進。\n目標はキンバライド基地。<ab(700)><ed()>",
+   "en": "<op()><sp(20)>All right, this ship will advance.\nOur objective is Kimbareid Base.<ab(700)><ed()>"
+  },
+  {
+   "ids": [
+    76
+   ],
+   "jp": "<op()><sp(20)>まだ残っているのが気がかりだが…\nとりあえず帰艦しろ。<ab(700)><ed()>",
+   "en": "<op()><sp(20)>It bothers me that some are still left...\nbut return to the ship for now.<ab(700)><ed()>"
+  },
+  {
+   "ids": [
+    81
+   ],
+   "jp": "<op()><sp(20)>だめです！　進路確保できません！<ab(500)><ed()>",
+   "en": "<op()><sp(20)>It's no good! We can't secure a route!<ab(500)><ed()>"
+  },
+  {
+   "ids": [
+    82
+   ],
+   "jp": "<op()><sp(20)>やむをえん…一旦後退する！<ab(700)><ed()>",
+   "en": "<op()><sp(20)>No choice... Fall back for now!<ab(700)><ed()>"
+  },
+  {
+   "ids": [
+    85
+   ],
+   "jp": "<op()><sp(20)>木星蜥蜴…何度も戦ってきた奴らだな。<ab(300)>",
+   "en": "<op()><sp(20)>The Jovian Lizards... We've fought\nthese guys plenty of times.<ab(300)>"
+  },
+  {
+   "ids": [
+    86
+   ],
+   "jp": "<sp(20)>地球への襲撃を繰り返す\n正体不明の無人兵器…<ab(500)>",
+   "en": "<sp(20)>Unidentified unmanned weapons that\nkeep raiding Earth...<ab(500)>"
+  },
+  {
+   "ids": [
+    87
+   ],
+   "jp": "<sp(20)>個々の戦力はたいしたことはないが\nこれだけ数が多いと厄介だな。<ab(500)>",
+   "en": "<sp(20)>Alone, they're not much of a threat,\nbut in these numbers they're a pain.<ab(500)>"
+  },
+  {
+   "ids": [
+    88
+   ],
+   "jp": "<sp(20)>マルチロックできる兵装を使えば…<ab(700)><ed()>",
+   "en": "<sp(20)>With a weapon that can Multi-Lock...<ab(700)><ed()>"
+  },
+  {
+   "ids": [
+    91
+   ],
+   "jp": "<op()><sp(20)>敵の来る方向に目標があるのか？<ab(800)><ed()>",
+   "en": "<op()><sp(20)>Is the target where the enemies are\ncoming from?<ab(800)><ed()>"
+  },
+  {
+   "ids": [
+    94
+   ],
+   "jp": "<op()><sp(20)>……わからないな。\nこいつらがなぜこんなところに？<ab(700)><ed()>",
+   "en": "<op()><sp(20)>...I don't get it.\nWhy would these things be out here?<ab(700)><ed()>"
+  },
+  {
+   "ids": [
+    97
+   ],
+   "jp": "<op()><sp(20)>このままでは本艦は進行不能です。<ab(300)><ed()>",
+   "en": "<op()><sp(20)>At this rate, this ship won't be able\nto advance.<ab(300)><ed()>"
+  },
+  {
+   "ids": [
+    98
+   ],
+   "jp": "<op()><sp(20)>まだか！　急ぐんだ！<ab(500)><ed()>",
+   "en": "<op()><sp(20)>Not yet?! Hurry up!<ab(500)><ed()>"
+  },
+  {
+   "ids": [
+    101
+   ],
+   "jp": "<op()><sp(20)>大丈夫か！？　気をつけていけ！<ab(400)><ed()>",
+   "en": "<op()><sp(20)>Are you all right?!\nBe careful out there!<ab(400)><ed()>"
+  },
+  {
+   "ids": [
+    102
+   ],
+   "jp": "<op()><sp(20)>よし、機動兵器は全滅したようだな。\nチューリップを始末してくれ。<ab(600)><ed()>",
+   "en": "<op()><sp(20)>Good, the mobile weapons seem to be\nwiped out. Now finish off the Chulips.<ab(600)><ed()>"
+  },
+  {
+   "ids": [
+    201
+   ],
+   "jp": "<on()><sp(20)>本艦前方に多数の熱源反応。<ab(0)><off()>",
+   "en": "<on()><sp(20)>Multiple heat signatures ahead of the\nship.<ab(0)><off()>"
+  },
+  {
+   "ids": [
+    202
+   ],
+   "jp": "<on()><sp(20)>目標は視認できるな？\nそいつらを排除するんだ。<ab(0)><off()>",
+   "en": "<on()><sp(20)>You have visual on the targets?\nEliminate them.<ab(0)><off()>"
+  },
+  {
+   "ids": [
+    300
+   ],
+   "jp": "<op()><sp(20)>作戦の補足<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Supplementary mission info)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    301
+   ],
+   "jp": "<op()><sp(20)>その調子だと誉められる<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Praised: keep it up)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    302
+   ],
+   "jp": "<op()><sp(20)>その調子だと誉められる　その２<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Praised: keep it up, part 2)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    303
+   ],
+   "jp": "<op()><sp(20)>成功条件を満たしたと誉められる<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Praised for clearing victory\nconditions)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    304
+   ],
+   "jp": "<op()><sp(20)>がんばれと激励<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Encouragement to do your best)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    305
+   ],
+   "jp": "<op()><sp(20)>急いでくれと急かされる（ヤバい時用）<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Urged to hurry - for crisis moments)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    306
+   ],
+   "jp": "<op()><sp(20)>すごいほめられる<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Lavish praise)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    307
+   ],
+   "jp": "<op()><sp(20)>時間切れだが、\nミッション成功だとお知らせ<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Time is up, but notice that the\nmission succeeded)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    308
+   ],
+   "jp": "<op()><sp(20)>時間切れでミッション失敗だと怒られる<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Scolded for mission failure on\ntimeout)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    309
+   ],
+   "jp": "<op()><sp(20)>タックの独り言<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Tak's monologue)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    310
+   ],
+   "jp": "<op()><sp(20)>敵が来る方向に破壊対象がある<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(The targets lie where the enemies\ncome from)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    311
+   ],
+   "jp": "<op()><sp(20)>敵の目的は一体？<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(What is the enemy after?)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    312
+   ],
+   "jp": "<op()><sp(20)>バニングの喝<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Burning's rousing rebuke)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    313
+   ],
+   "jp": "<op()><sp(20)>アムロの激励\n（機体別、自機がアムロ以外）<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Amuro's encouragement)\n(by unit, when the player isn't Amuro)<ab(3000)><ed()>"
+  },
+  {
+   "ids": [
+    314
+   ],
+   "jp": "<op()><sp(20)>残るはチューリップのみ<ab(3000)><ed()>",
+   "en": "<op()><sp(20)>(Only the Chulips remain)<ab(3000)><ed()>"
+  }
+ ]
+}

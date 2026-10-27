@@ -71,6 +71,10 @@ def main():
         elif parts and parts[-1].startswith(':s'):
             sid = int(parts[-1][2:])
             got = next(t.rows for s, off, t in small_tables(data) if s == sid)
+            src = locate(disc.get(rid), parts)
+            # containers without a dialogue table (6036, 6330...) have only this check
+            require(len(data) - len(src) == mission_text_bytes(data) - mission_text_bytes(src),
+                    'Mission container carries dead bytes: ' + loc)
             checked['unit-name sub-tables'] += 1
         elif parts and parts[-1].startswith(':v'):
             magic = parts[-1][2:].encode().ljust(4, b'\0')

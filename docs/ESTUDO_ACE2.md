@@ -208,11 +208,11 @@ nova, monte o ambiente antes com `docs/RETOMADA.md`.
 
 | Item | Estado |
 |---|---|
-| Builds | 0.0.1 e 0.0.9 testadas no PCSX2. **0.0.9** = todo o texto das tabelas; no teste (09/10) rótulos de menu sumiram e o jogo travou ao pausar na missão. **0.0.10** = correção desses rótulos e do menu de pausa; no teste (10/10) travou na Op 12-1 por falta de memória. **0.0.11** = contêineres sem tabela morta (8.6 item 0). **0.0.13** = janela de mensagem 60 → 128 letras; no teste (10/10) as cutscenes não travaram e o gameplay ficou estável. **0.0.14** = falas dos parceiros em inglês (8.6 item 0c); no teste (16/10) travou na Op 11-1. **0.0.15** = 27 linhas em até 32 letras + regra `widget` no validador; travou no mesmo ponto (16/10). A captura mostrou que o contador do HUD junta rótulo + "：" + valor num widget de 32 (39 letras). **0.0.16** = contadores e `menu3056` dentro de 32 + `check_counters`, ainda não testada. |
+| Builds | 0.0.1 e 0.0.9 testadas no PCSX2. **0.0.9** = todo o texto das tabelas; no teste (09/10) rótulos de menu sumiram e o jogo travou ao pausar na missão. **0.0.10** = correção desses rótulos e do menu de pausa; no teste (10/10) travou na Op 12-1 por falta de memória. **0.0.11** = contêineres sem tabela morta (8.6 item 0). **0.0.13** = janela de mensagem 60 → 128 letras; no teste (10/10) as cutscenes não travaram e o gameplay ficou estável. **0.0.14** = falas dos parceiros em inglês (8.6 item 0c); no teste (16/10) travou na Op 11-1. **0.0.15** = 27 linhas em até 32 letras + regra `widget` no validador; travou no mesmo ponto (16/10). A captura mostrou que o contador do HUD junta rótulo + "：" + valor num widget de 32 (39 letras). **0.0.16** = contadores e `menu3056` dentro de 32 + `check_counters`; no teste (23/10) a Op 04-01 estava inteira em japonês. **0.0.17** = Op 04-01 (6041/42041) e 6907 descobertas e traduzidas, nomes de alvo de todos os contêineres (lista A pelo contador de +28, contêineres sem diálogo), ainda não testada. |
 | Parceiros (`xp`) | **6.138/6.138** linhas (2.657 frases únicas) traduzidas pelo Claude, validadas e aplicadas na 0.0.14. |
 | Campanha (Ops 01–28) | **6.822/6.822** linhas traduzidas, validadas, revisadas linha a linha e aplicadas. Correções do revisor: Op 02 30; Ops 03–08 56; Ops 09–22 350; Ops 23–24 67; Op 25 204; Ops 26–28 94. |
 | Fora das operações | **Aplicados** os 57 lotes: `xa` 457 linhas (76 correções), `xb` 628 e `xd` 142 (107), `xc` 122 + menus 3000–3018 (92), enciclopédia/menus 3019–3029 (121, enciclopédia e cartas retraduzidas), menus 3032–3057 (110), 3061–3077 (121). Menus 2.171/2.171. |
-| HUD, nomes, `common` | Completos (HUD 256/256, `unit_names` 89/89, rótulos de quem fala 118/118, nomes completos 83/83). |
+| HUD, nomes, `common` | Completos (HUD 256/256, `unit_names` 120/120 desde a 0.0.17, rótulos de quem fala 118/118, nomes completos 83/83). Falta a segunda tabela dos contêineres (`+24`, nomes de objeto/alvo): 8.6 item 0d. |
 | Fora das tabelas | Levantamento feito em 08/10 (8.8): poucas texturas com japonês, o título do save no executável, filmes não conferidos. Nada disso tem lote ainda. |
 | Quarentena | `agent/_quarentena_google_0.0.3/` (aplicação do agente em 06/10) e `_quarentena_google_0.0.8/` (script `apply_op23_02.ps1` que ele deixou em `agent/`). Só registro. |
 
@@ -296,6 +296,14 @@ Rode tudo com `.venv\Scripts\python.exe tools\ace2\<script>`.
   "Quincy Isser", "Wingel Binder" passaram. A revisão de sentido tem de conferir a grafia inteira.
 - **Botões nos menus:** `決定` = "OK"; separadores com o espaço largo `　` onde o japonês tem; rótulo seguido de valor
   (`難易度：　`) termina em `:　`.
+- **Reconhecimento de contêiner de missão** (0.0.17; a Op 04-01 ficou em japonês até a 0.0.16 por causa disso):
+  - `00 01 00 00` com `+8` = 0 é tanto LZSS quanto contêiner com lista A vazia; `is_packed` decide pelo tamanho
+    declarado (≤ 8× o recurso);
+  - a lista A é lida pelo contador do byte +28, nunca até +12;
+  - há contêiner sem diálogo (`+20` = 0) e com `+4` = 0.
+  - Depois de mudar a descoberta, compare a contagem de locais do `export_text` antes e depois.
+  - Fills indexados pela posição (`_fill/unit_names.json`) precisam ser remapeados pelo japonês quando a exportação
+    insere linhas.
 - **Memória das missões:** o jogo carrega tudo de uma missão numa única arena (`0x003afe00..0x01cfff00`) sem folga.
   Pedido que não cabe volta NULL e o jogo não confere. Nenhum recurso residente na missão pode carregar bytes mortos.
   Contêiner de missão cresce só o que as suas tabelas crescem (`audit_iso.py` confere) e toda mudança de tamanho em
@@ -348,10 +356,9 @@ Rode tudo com `.venv\Scripts\python.exe tools\ace2\<script>`.
      - crescimento: 42121 de +6.480 para **+256**; maior contêiner de +24.800 para +800; total de +920 KB para
        −12 KB. Tabela por missão em `work/ui/memoria_missoes_0.0.11.txt`;
      - `audit_iso.py` agora reprova contêiner com bytes mortos.
-   - **Achado à parte (não corrigido):** em 82 contêineres a lista A não tem lista B depois (+12 = 0), e
-     `ace2lib.small_tables` (que vai de +8 até +12) não lê os nomes de inimigo deles, que ficaram em japonês (por
-     exemplo, 6012, 6031). Corrigir para usar o contador de +28 e traduzir os nomes que faltarem, de olho no
-     crescimento de memória.
+   - **Achado à parte, corrigido na 0.0.17:** `ace2lib.small_tables` ia de +8 até +12 e não lia nada quando a lista
+     B estava vazia (+12 = 0). Agora usa o contador do byte +28 (`list_a`), e `mission_container()` reconhece também
+     os 43 contêineres sem diálogo. São 786 subtabelas (eram 442); `unit_names` foi de 89 para 120 linhas.
 0b. **Memória +256 KB na 0.0.12** (`tools/ace2/exe.py`, decisão do usuário): a fronteira pilha/heap sobe de
    `0x01f00000` para `0x01f40000`. Uso máximo medido da pilha: 161 KB, agora de 768 KB. Conferido no PCSX2: arena
    `0x1990100`, jogo inicia. `crash_watch.py` vigia arena e pilha durante o jogo.
@@ -366,6 +373,19 @@ Rode tudo com `.venv\Scripts\python.exe tools\ace2\<script>`.
      `reviewer_fixes.json` e `validate_return.py xp_NN --apply`, como nos outros lotes;
    - nomes de piloto (`partner_names`) já preenchidos pelo glossário;
    - `FNM` (nome do modelo) ainda fora: conferir se aparece na tela antes de traduzir.
+0d. **Segunda tabela dos contêineres de missão (`+24`), não extraída:**
+   - guarda os nomes de objeto/alvo que aparecem no HUD; 76 contêineres, 116 linhas e 41 nomes únicos em japonês;
+   - exemplos: チューリップ (6041, 6101, 6172; o alvo da própria 4-1), ソーラー施設 (6111, o "achado à parte" da
+     0.0.16), ギガノス基地, ランチゲート, カトンボ, 無限起動砲;
+   - `+24` já é campo de offset no `mission_fields`. Falta descobrir a tabela no `textdb`, exportar (provavelmente
+     para a `unit_names`) e conferir o crescimento de memória.
+0e. **Transbordo de widget achado depois da 0.0.17 (primeiro item da 0.0.18):** `work/ui/auditoria_transbordo_0.0.17.md`.
+   - Encurtar `menu3041` #0, #18, #19, #29 (mensagens do cartão "em andamento", 85–100 letras num widget de 80) e
+     `menu3055` #25 e #32 (lista da Free Mission, 33–34 em 32; mesmas frases em `brief63010` #4 e `brief63013` #5).
+   - Estender a regra `widget` do `validate.py` a `menu*` e `brief*` (linha única sem tags, japonês ≤ 32) e encurtar
+     o que ela acusar (~45 linhas).
+   - No teste, com `crash_watch.bat`: enciclopédia, cartas, ajuda da preparação de saída, Options, `menu3072`,
+     `menu3009`, salvar com cartão cheio e sem cartão. Fecha as capacidades que faltam.
 1. **Teste da 0.0.10:** pausar no meio da missão (crash da 0.0.9) e anotar a operação/missão; telas Intermission,
    Options > Game e Options > Controller sem rótulo em branco. Se a pausa ainda travar, a causa não é largura de
    texto: próximos suspeitos são os contêineres de missão que cresceram e o atlas da fonte 38000/2501. Depois,
@@ -422,6 +442,11 @@ Rode tudo com `.venv\Scripts\python.exe tools\ace2\<script>`.
 
 **Tabelas de texto: nada.** As 10.695 linhas únicas que pedem tradução estão em inglês (campanha 6.822, menus
 2.171, tutorial 628, missões extras 457, missões curtas 142, flashbacks 122, HUD 256, nomes 89, janelas 8).
+
+> **Correção de 2026-10-23:** esse "nada" valia só para as tabelas que o `textdb` enxergava.
+> - A missão 04-01 (6041/42041), a 6907 e 344 tabelas de nomes de alvo em 125 contêineres ficaram de fora até a
+>   0.0.16. Traduzidos na 0.0.17: 46 linhas de missão e 31 nomes.
+> - A segunda tabela `+24` dos contêineres (8.6 item 0d) continua de fora.
 
 Fora das tabelas:
 

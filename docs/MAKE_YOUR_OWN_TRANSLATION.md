@@ -10,8 +10,8 @@ project uses. Set up the environment first: [BUILD_FROM_SOURCE.md](BUILD_FROM_SO
 # 1. edit work\translation\en\_fill\<table>.json (English by row position)
 .venv\Scripts\python.exe tools\ace2\merge_fill.py --check          # 2. validate: fix every ERROR
 .venv\Scripts\python.exe tools\ace2\merge_fill.py                  # 3. merge into the table files
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16-mine --write             # 4. build
-.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.16-mine.iso    # 5. audit: PASS
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17-mine --write             # 4. build
+.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.17-mine.iso    # 5. audit: PASS
 ```
 
 Then test in PCSX2 with a normal boot. Add `--svv-opening` to steps 4 and 5 if you do not have the 2006 disc. To
@@ -21,17 +21,17 @@ Remember `$env:PYTHONIOENCODING = 'utf-8'` in every new terminal.
 
 ## How the text is stored
 
-The game has 1,394 text locations. Copies of the same table (and twin mission files with identical lines) are grouped
-into one logical table, saved as one file (432 files):
+The game has 1,741 text locations. Copies of the same table (and twin mission files with identical lines) are grouped
+into one logical table, saved as one file (434 files):
 
 | File name | Content | Lines |
 |---|---|---|
-| `m6005.json` … `m6998.json` | mission dialogue (radio and cut-in lines), objectives, counters | 6,583 |
+| `m6005.json` … `m6998.json` | mission dialogue (radio and cut-in lines), objectives, counters | 6,629 |
 | `partner020.json` … `partner221.json` | partners' battle chatter, one file per partner (who speaks: `work/translation/partners.json`) | 6,138 |
 | `brief63000.json` … `brief63300.json` | briefings, tactical briefings, debriefings, reports | 1,588 |
 | `menu3000.json` … `menu3077.json` | menus, encyclopedia, messages, pilot ranks | 2,171 |
 | `hud3013.json`, `hud3020.json`, `hud3021.json`, `hud3024.json` | pause menu, results, command list, speaker labels | 256 |
-| `unit_names.json` | enemy names on the lock-on HUD | 89 |
+| `unit_names.json` | enemy names on the lock-on HUD | 120 |
 | `partner_names.json` | partners' pilot names | 51 |
 | `common.json` | system windows (memory card, reset) | 8 |
 
@@ -84,8 +84,8 @@ into the table file. Editing `_fill` and merging is the safe way: the merge refu
 5. **Build and audit** with your own version name so you never mix images:
 
    ```
-   .venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16-mine --write
-   .venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.16-mine.iso
+   .venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17-mine --write
+   .venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.17-mine.iso
    ```
 
 6. **Test in PCSX2** with a normal boot (not a save state).

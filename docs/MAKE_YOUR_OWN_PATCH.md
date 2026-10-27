@@ -17,16 +17,16 @@ $env:PYTHONIOENCODING = 'utf-8'
 .venv\Scripts\python.exe tools\ace2\merge_fill.py --check
 .venv\Scripts\python.exe tools\ace2\merge_fill.py
 # build, audit, patch
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16-yourname --write
-.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.16-yourname.iso
-.venv\Scripts\python.exe tools\ace2\make_patch.py --version 0.0.16-yourname --xdelta3 C:\tools\xdelta3.exe
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17-yourname --write
+.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.17-yourname.iso
+.venv\Scripts\python.exe tools\ace2\make_patch.py --version 0.0.17-yourname --xdelta3 C:\tools\xdelta3.exe
 ```
 
-Result in `work/release/`: `ACE2-EN-0.0.16-yourname.xdelta` and `ACE2-EN-0.0.16-yourname-SHA256.txt`. Share those
+Result in `work/release/`: `ACE2-EN-0.0.17-yourname.xdelta` and `ACE2-EN-0.0.17-yourname-SHA256.txt`. Share those
 two files.
 
 **No 2006 disc?** Add `--svv-opening` to all three of the last commands (the build and the audit then use
-`ACE2-EN-0.0.16-yourname-svv-opening.iso`; the patch keeps the same name). The patch is the same either way: patches
+`ACE2-EN-0.0.17-yourname-svv-opening.iso`; the patch keeps the same name). The patch is the same either way: patches
 never contain the 2006 opening.
 
 ## What you need
@@ -41,7 +41,7 @@ never contain the 2006 opening.
 ## 1. Pick a version name
 
 The version is only a name: it goes into the file names and the checksum file, and it does not change the image.
-Use the project version your work starts from plus your name, for example `0.0.16-alex`, then `0.0.16-alex.2` for
+Use the project version your work starts from plus your name, for example `0.0.17-alex`, then `0.0.17-alex.2` for
 your next build. **Never use a bare project number** (`0.0.17`, `0.1.0`): players must be able to tell your patch
 from the project's. Use only letters, digits, dots and dashes.
 
@@ -58,9 +58,9 @@ project's patch, as long as your build picked the same fonts (see [below](#why-y
 ## 3. Build, audit and test
 
 ```
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16-yourname
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16-yourname --write
-.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.16-yourname.iso
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17-yourname
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17-yourname --write
+.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.17-yourname.iso
 ```
 
 - The first command is a dry run: it validates every line and writes nothing. The second writes the image and ends
@@ -72,7 +72,7 @@ project's patch, as long as your build picked the same fonts (see [below](#why-y
   can freeze the game minutes later, far from the line itself, so test the whole scene.
 
 Without the 2006 disc, add `--svv-opening` to the build and audit commands; the image is then
-`work\output\ACE2-EN-0.0.16-yourname-svv-opening.iso`.
+`work\output\ACE2-EN-0.0.17-yourname-svv-opening.iso`.
 
 ## 4. Install xdelta3
 
@@ -91,11 +91,11 @@ Check it: `xdelta3 -V` (or `C:\tools\xdelta3.exe -V`) prints `Xdelta version 3.0
 ## 5. Make the patch
 
 ```
-.venv\Scripts\python.exe tools\ace2\make_patch.py --version 0.0.16-yourname --xdelta3 C:\tools\xdelta3.exe
+.venv\Scripts\python.exe tools\ace2\make_patch.py --version 0.0.17-yourname --xdelta3 C:\tools\xdelta3.exe
 ```
 
 (`--svv-opening` if you built with it. Leave out `--xdelta3` when `xdelta3` is on `PATH`. Linux/macOS:
-`.venv/bin/python tools/ace2/make_patch.py --version 0.0.16-yourname`.)
+`.venv/bin/python tools/ace2/make_patch.py --version 0.0.17-yourname`.)
 
 It takes a few minutes and checks every step:
 
@@ -110,7 +110,7 @@ It takes a few minutes and checks every step:
    your build's SHA-256 (with `--svv-opening`, the patched image itself must be your build). Then it writes the
    checksum file.
 
-It ends with `PASS: work\release\ACE2-EN-0.0.16-yourname.xdelta (… bytes), ACE2-EN-0.0.16-yourname-SHA256.txt`.
+It ends with `PASS: work\release\ACE2-EN-0.0.17-yourname.xdelta (… bytes), ACE2-EN-0.0.17-yourname-SHA256.txt`.
 
 | File in `work/release/` | What it is |
 |---|---|
@@ -125,11 +125,11 @@ It ends with `PASS: work\release\ACE2-EN-0.0.16-yourname.xdelta (… bytes), ACE
 Do what a player will do, with the untouched ISO, and compare the result with your checksum file:
 
 ```
-xdelta3 -d -s "Another Century's Episode 2 - Special Vocal Version (Japan).iso" work\release\ACE2-EN-0.0.16-yourname.xdelta ACE2-EN-0.0.16-yourname.iso
-Get-FileHash ACE2-EN-0.0.16-yourname.iso
+xdelta3 -d -s "Another Century's Episode 2 - Special Vocal Version (Japan).iso" work\release\ACE2-EN-0.0.17-yourname.xdelta ACE2-EN-0.0.17-yourname.iso
+Get-FileHash ACE2-EN-0.0.17-yourname.iso
 ```
 
-The hash must equal the line "Output after the patch (Special Vocal opening)" of `ACE2-EN-0.0.16-yourname-SHA256.txt`.
+The hash must equal the line "Output after the patch (Special Vocal opening)" of `ACE2-EN-0.0.17-yourname-SHA256.txt`.
 If you have the 2006 disc, `swap_movie.py` on that output must give the "Glorious" line
 ([GLORIOUS_OPENING.md](GLORIOUS_OPENING.md)).
 
@@ -156,22 +156,22 @@ This keeps your text changes public next to the patch, so anyone can see what yo
    git switch -c my-version
    git add -A
    git status
-   git commit -m "0.0.16-yourname: <what you changed>"
-   git tag -a v0.0.16-yourname -m "English patch 0.0.16-yourname"
+   git commit -m "0.0.17-yourname: <what you changed>"
+   git tag -a v0.0.17-yourname -m "English patch 0.0.17-yourname"
    git push myfork my-version --tags
    ```
 
    In `git status`, only text files must appear: `work/translation/…json`, the build report
    `work/output/ACE2-EN-<version>.json`, maybe `docs/` or `tools/`. If an `.iso`, `.xdelta`, `.PSS`, `.p2s` or `.7z`
    shows up, stop: the `.gitignore` was changed or the file is somewhere unexpected.
-3. On your fork: **Releases → Draft a new release** → choose the tag `v0.0.16-yourname` → title, for example
-   `ACE2 English Patch 0.0.16-yourname` → write the notes (template below) → attach the `.xdelta`, the
+3. On your fork: **Releases → Draft a new release** → choose the tag `v0.0.17-yourname` → title, for example
+   `ACE2 English Patch 0.0.17-yourname` → write the notes (template below) → attach the `.xdelta`, the
    `-SHA256.txt` and `swap_movie.py` → tick **Set as a pre-release** if it is not fully tested → **Publish release**.
 
    With the [GitHub CLI](https://cli.github.com/) instead:
 
    ```
-   gh release create v0.0.16-yourname work/release/ACE2-EN-0.0.16-yourname.xdelta work/release/ACE2-EN-0.0.16-yourname-SHA256.txt tools/ace2/swap_movie.py --repo <you>/<fork name> --title "ACE2 English Patch 0.0.16-yourname" --notes-file notes.md --prerelease
+   gh release create v0.0.17-yourname work/release/ACE2-EN-0.0.17-yourname.xdelta work/release/ACE2-EN-0.0.17-yourname-SHA256.txt tools/ace2/swap_movie.py --repo <you>/<fork name> --title "ACE2 English Patch 0.0.17-yourname" --notes-file notes.md --prerelease
    ```
 
 To bring later project updates into your fork: `git pull origin main` (where `origin` is the project), fix any
@@ -191,19 +191,19 @@ kind of correction goes, and [reporting a bad line](MAKE_YOUR_OWN_TRANSLATION.md
 ### Notes template
 
 ```markdown
-Unofficial English patch **0.0.16-yourname** for Another Century's Episode 2 – Special Vocal Version
-(PS2, SLPS-25829), based on <project link> 0.0.16. <What you changed.>
+Unofficial English patch **0.0.17-yourname** for Another Century's Episode 2 – Special Vocal Version
+(PS2, SLPS-25829), based on <project link> 0.0.17. <What you changed.>
 
 ## Files
-- `ACE2-EN-0.0.16-yourname.xdelta` – apply to your untouched Special Vocal Version ISO
-- `ACE2-EN-0.0.16-yourname-SHA256.txt` – checksums of the input and of every output
+- `ACE2-EN-0.0.17-yourname.xdelta` – apply to your untouched Special Vocal Version ISO
+- `ACE2-EN-0.0.17-yourname-SHA256.txt` – checksums of the input and of every output
 - `swap_movie.py` – optional: the original 2006 "Glorious" opening (needs your 2006 disc and Python 3.8+)
 
 ## How to install
 1. Check your ISO: SHA-256 `efd791e7c50af2ec476f4026c6bda57fcf6d64babf20c12174db642b54941741`.
-2. `xdelta3 -d -s "<your SVV>.iso" ACE2-EN-0.0.16-yourname.xdelta ACE2-EN-0.0.16-yourname.iso` (or Delta Patcher).
+2. `xdelta3 -d -s "<your SVV>.iso" ACE2-EN-0.0.17-yourname.xdelta ACE2-EN-0.0.17-yourname.iso` (or Delta Patcher).
 3. Check the result against "Output after the patch" in the SHA256 file.
-4. Optional "Glorious" opening: `python swap_movie.py --target ACE2-EN-0.0.16-yourname.iso --source "<your 2006>.iso" --out ACE2-EN-0.0.16-yourname-Glorious.iso --sha`
+4. Optional "Glorious" opening: `python swap_movie.py --target ACE2-EN-0.0.17-yourname.iso --source "<your 2006>.iso" --out ACE2-EN-0.0.17-yourname-Glorious.iso --sha`
 
 No game data is included. You need your own copy of the game.
 ```

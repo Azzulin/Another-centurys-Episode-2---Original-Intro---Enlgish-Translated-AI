@@ -12,7 +12,7 @@ translation reaches every copy and every slot that carries the same text.
 """
 import re, struct
 from ace2lib import u32, align, Disc, inner_entries, inner_rebuild, try_unpack, pack, unpack, TextTable, mission_table, \
-    mission_relayout, small_tables, require, vmd_chunks, vmd_replace, VMD_TEXT
+    mission_container, mission_relayout, list_a, small_tables, require, vmd_chunks, vmd_replace, VMD_TEXT
 
 JPC = re.compile(r'[぀-ヿ一-鿿]')
 # control tokens that must survive translation in the same order
@@ -21,9 +21,10 @@ MAX_SCAN = 64 << 20
 
 
 def _walk(data, path, depth, out):
-    mt = mission_table(data)
-    if mt:
-        out.append((path + ':m', mt[1]))
+    if mission_container(data):
+        mt = mission_table(data)
+        if mt:
+            out.append((path + ':m', mt[1]))
         for sid, off, t in small_tables(data):
             out.append(('%s:s%d' % (path, sid), t))
         return
@@ -136,9 +137,7 @@ def patch_mission(container, sub_texts, main_texts):
     the tables instead (ACE3 method) leaves the Japanese ones as dead weight in the game's memory arena, which made
     Op 12-1 run out of memory after its cutscene (0.0.10). Bytes that are not text stay identical."""
     replace = {}
-    first, end = u32(container, 8), u32(container, 12)
-    for rec in range(first, end, 16):
-        sid, off = struct.unpack_from('<II', container, rec)
+    for sid, off in list_a(container):
         if sid not in sub_texts or off in replace:
             continue
         try:
@@ -148,10 +147,12 @@ def patch_mission(container, sub_texts, main_texts):
         new = rebuild_table(container[off:off + t.size], sub_texts[sid])
         if new != container[off:off + t.size]:
             replace[off] = new
-    at, t = mission_table(container)
-    rows = {tid: main_texts[jp] for tid, jp in t.rows.items() if jp in main_texts}
-    if rows:
-        replace[at] = t.rebuild(rows)
+    mt = mission_table(container)
+    if mt:
+        at, t = mt
+        rows = {tid: main_texts[jp] for tid, jp in t.rows.items() if jp in main_texts}
+        if rows:
+            replace[at] = t.rebuild(rows)
     return mission_relayout(container, replace) if replace else container
 
 

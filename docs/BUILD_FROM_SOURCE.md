@@ -1,7 +1,7 @@
 # Building the English ISO from source
 
 This rebuilds the English disc from your own Special Vocal Version ISO and the translation files in this repository,
-exactly as the maintainers do. Players who only want the current version (0.0.16) can apply its published patch
+exactly as the maintainers do. Players who only want the current version (0.0.17) can apply its published patch
 instead ([INSTALL_PATCH.md](INSTALL_PATCH.md)); building is for those who change the text, test the newest sources
 or want to check the release. No programming is needed, only copying a few commands. To share what you built, make
 an xdelta patch of it: [MAKE_YOUR_OWN_PATCH.md](MAKE_YOUR_OWN_PATCH.md).
@@ -86,9 +86,9 @@ The build report (`work/output/ACE2-EN-<version>.json`, key `fonts`) records the
 Run them one at a time.
 
 - `test_identity.py`: rebuilding every container without edits reproduces the original bytes: the index, the
-  binders, the LZSS blocks, every text table (including the 460 tables inside partner model packages) and the 201
+  binders, the LZSS blocks, every text table (including the 460 tables inside partner model packages) and the 247
   mission files rebuilt in place.
-- `test_textdb.py`: a synthetic translation 1.5× longer than the Japanese fits in all 1,394 text locations, with no
+- `test_textdb.py`: a synthetic translation 1.5× longer than the Japanese fits in all 1,741 text locations, with no
   dead bytes left in mission files, and the disc still has room.
 - `test_disc.py`: a disc rebuilt without edits is byte-identical to the original; a grown disc with the movie swap
   verifies. Writes two temporary images in `work/output/_test` and deletes them (needs ~8 GB; slow).
@@ -99,28 +99,28 @@ Dry run first (plans every change, validates every line, writes nothing, prints 
 prints nothing for the first minutes while it plans):
 
 ```
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17
 ```
 
 Then write the image:
 
 ```
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16 --write
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17 --write
 ```
 
-Output: `work/output/ACE2-EN-0.0.16.iso` and `work/output/ACE2-EN-0.0.16.json` (report: tables, fonts, sizes,
+Output: `work/output/ACE2-EN-0.0.17.iso` and `work/output/ACE2-EN-0.0.17.json` (report: tables, fonts, sizes,
 SHA-256). The last line is `PASS: extents, every file payload and every changed resource verified. SHA-256 …`.
 
 The version is only a name for the output files; it does not change the image. If you edit the text, use a name of
-your own (`0.0.16-mine`) so you never confuse your image with a published one.
+your own (`0.0.17-mine`) so you never confuse your image with a published one.
 
 Without the 2006 disc:
 
 ```
-.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.16 --svv-opening --write
+.venv\Scripts\python.exe tools\ace2\build.py --version 0.0.17 --svv-opening --write
 ```
 
-writes `work/output/ACE2-EN-0.0.16-svv-opening.iso`, with the Special Vocal opening. Adding the 2006 movie to it
+writes `work/output/ACE2-EN-0.0.17-svv-opening.iso`, with the Special Vocal opening. Adding the 2006 movie to it
 later with [swap_movie.py](GLORIOUS_OPENING.md) gives the same bytes as the normal build.
 
 What the build does (details in [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md)):
@@ -143,7 +143,7 @@ The image size never changes (3,677,028,352 bytes).
 ## 7. Audit and compare
 
 ```
-.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.16.iso
+.venv\Scripts\python.exe tools\ace2\audit_iso.py work\output\ACE2-EN-0.0.17.iso
 ```
 
 (Add `--svv-opening` for an image built with that option.) It independently re-reads the image and checks: no
@@ -158,12 +158,12 @@ Expected SHA-256 of the build (printed by `build.py` and stored in the JSON repo
 
 | Image | SHA-256 |
 |---|---|
-| `ACE2-EN-0.0.16.iso` ("Glorious" opening) | `888f11d1e518cd45a7b71002cd041ee087e537e592d8e6d68cb8825f5b4ac79e` |
-| `ACE2-EN-0.0.16-svv-opening.iso` (built with `--svv-opening`) | `1608ce46831834437f53d427c8441b6c7ad9aeff0f4ebb5ae8b5caf9f8f40890` |
-| the `--svv-opening` image after `swap_movie.py` with the 2006 disc | `888f11d1e518cd45a7b71002cd041ee087e537e592d8e6d68cb8825f5b4ac79e` (same as the normal build) |
+| `ACE2-EN-0.0.17.iso` ("Glorious" opening) | `33fad6e583aa305123afbf4e2d6c41f6b110d6ad395cc32789d87369e2300a8d` |
+| `ACE2-EN-0.0.17-svv-opening.iso` (built with `--svv-opening`) | `8e8c5ed1740faa7924ce50f10913fcb1ecfb1ace0d80185185594ffc8e1be579` |
+| the `--svv-opening` image after `swap_movie.py` with the 2006 disc | `33fad6e583aa305123afbf4e2d6c41f6b110d6ad395cc32789d87369e2300a8d` (same as the normal build) |
 
 A different SHA with `PASS` almost always means different fonts (step 4): compare the `fonts` key of your report with
-the one in the repository's `work/output/ACE2-EN-0.0.16.json`. The image still works; it just is not byte-identical.
+the one in the repository's `work/output/ACE2-EN-0.0.17.json`. The image still works; it just is not byte-identical.
 
 ## 8. Play / test in PCSX2
 
@@ -188,7 +188,7 @@ runs out. It found the causes of the 0.0.10 and 0.0.15 freezes.
 2. Boot the image in PCSX2, then in the repository root:
 
    ```
-   .venv\Scripts\python.exe tools\research\crash_watch.py watch --iso work\output\ACE2-EN-0.0.16.iso
+   .venv\Scripts\python.exe tools\research\crash_watch.py watch --iso work\output\ACE2-EN-0.0.17.iso
    ```
 
    (`tools\research\crash_watch.bat` does both steps with a double click; edit the ISO name and the PCSX2 path at

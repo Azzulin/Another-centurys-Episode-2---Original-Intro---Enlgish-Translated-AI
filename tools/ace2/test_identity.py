@@ -7,7 +7,7 @@ import argparse, collections, sys, time
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from ace2lib import BASE, BASE_EXE, Disc, inner_entries, inner_rebuild, try_unpack, unpack, pack, TextTable, \
-    mission_table, mission_relayout, small_tables, require, u32, vmd_chunks, vmd_replace, VMD_TEXT
+    mission_container, mission_table, mission_relayout, small_tables, require, u32, vmd_chunks, vmd_replace, VMD_TEXT
 
 
 def walk(data, path, depth, visit):
@@ -58,17 +58,23 @@ def main():
                     stats['partner package tables'] += 1
                     stats['rows'] += len(t.rows)
             return
-        mt = mission_table(data)
-        if mt:
-            at, table = mt
-            require(mission_relayout(data, {at: data[at:at + table.size]}) == data, 'mission relayout identity at ' + path)
-            new = mission_relayout(data, {at: table.rebuild({})})
-            require(TextTable(new[u32(new, 20):]).rows == table.rows, 'mission relayout rows at ' + path)
-            for sid, off, t in small_tables(data):
+        if mission_container(data):
+            mt = mission_table(data)
+            if mt:
+                at, table = mt
+                require(mission_relayout(data, {at: data[at:at + table.size]}) == data, 'mission relayout identity at ' + path)
+                new = mission_relayout(data, {at: table.rebuild({})})
+                require(TextTable(new[u32(new, 20):]).rows == table.rows, 'mission relayout rows at ' + path)
+                stats['mission containers'] += 1
+                stats['rows'] += len(table.rows)
+            else:
+                stats['mission containers without dialogue'] += 1
+            subs = small_tables(data)
+            require(mission_relayout(data, {off: data[off:off + t.size] for sid, off, t in subs}) == data,
+                    'mission relayout identity of sub-tables at ' + path)
+            for sid, off, t in subs:
                 require(TextTable(t.rebuild({})).rows == t.rows, 'sub-table rebuild at %s/%d' % (path, sid))
                 stats['mission sub-tables'] += 1
-            stats['mission containers'] += 1
-            stats['rows'] += len(table.rows)
         elif data[:4] == b'\0\0\1\0':
             try:
                 t = TextTable(data)

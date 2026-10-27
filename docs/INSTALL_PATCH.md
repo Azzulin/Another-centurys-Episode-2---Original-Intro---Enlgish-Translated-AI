@@ -2,10 +2,12 @@
 
 This guide is for players. It takes about 10 minutes and needs no programming.
 
-> **Which version?** Use the newest patch on the [Releases](../../../releases) page: **0.0.16** (pre-release, a
-> test build being played through; known issues in [STATUS.md](STATUS.md)). Do not use the older 0.0.10: it freezes
-> in Operation 12-1 after the cutscene, and its partners speak Japanese. The steps below are the same for every
-> patch, including patches other people make from this repository ([MAKE_YOUR_OWN_PATCH.md](MAKE_YOUR_OWN_PATCH.md)).
+> **Which version?** Use the newest patch on the [Releases](../../../releases) page: **0.0.17** (pre-release, a
+> test build being played through; known issues in [STATUS.md](STATUS.md)). It replaces 0.0.16, where Operation
+> 04-01 was entirely in Japanese. Do not use the older 0.0.10: it freezes in Operation 12-1 after the cutscene, and
+> its partners speak Japanese. Every patch applies to the **untouched** Special Vocal Version, never on top of an
+> older patched ISO. The steps below are the same for every patch, including patches other people make from this
+> repository ([MAKE_YOUR_OWN_PATCH.md](MAKE_YOUR_OWN_PATCH.md)).
 
 You will end up with one of two discs:
 
@@ -110,6 +112,8 @@ More about the movie swap, including doing it on the untouched Japanese disc: [G
 | `swap_movie.py`: "Movie sizes differ" | The source is not the 2006 Japanese release (or is a damaged dump). |
 | `swap_movie.py`: "Not an ISO9660 image" | The file is `.bin`, `.chd`, `.cso`, `.gz`…; convert it to a plain `.iso` first. |
 | Garbled text right after booting | You loaded an old save state. Boot the game normally. |
-| Freeze in Op 12-1 after the cutscene (0.0.10) | Fixed since 0.0.13: use the 0.0.16 patch. |
-| Partners speak Japanese (0.0.10) | Translated since 0.0.14: use the 0.0.16 patch. |
+| Patcher fails on an English ISO from an older patch | Patches never stack: apply the new one to the untouched Special Vocal Version. Memory card saves carry over. |
+| Freeze in Op 12-1 after the cutscene (0.0.10) | Fixed since 0.0.13: use the newest patch. |
+| Partners speak Japanese (0.0.10) | Translated since 0.0.14: use the newest patch. |
+| Op 04-01 entirely in Japanese (0.0.16) | Fixed in 0.0.17. |
 | Blank menu labels, other freezes | Known issues of the test builds: [STATUS.md](STATUS.md). Please report where it happened. |

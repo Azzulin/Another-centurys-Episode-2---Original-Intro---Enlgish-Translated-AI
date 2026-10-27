@@ -1,0 +1,30 @@
+{
+ "table": "m6907",
+ "kind": "mission",
+ "copies": [
+  "6907:m"
+ ],
+ "rows": [
+  {
+   "ids": [
+    1
+   ],
+   "jp": "バッタの全撃破",
+   "en": "Destroy all Batta"
+  },
+  {
+   "ids": [
+    2
+   ],
+   "jp": "ナデシコの撃沈",
+   "en": "Nadesico sunk"
+  },
+  {
+   "ids": [
+    20
+   ],
+   "jp": "<op()><sp(20)>すごい数です、気をつけてください<ab(2000)><ed()>",
+   "en": "<op()><sp(20)>There are so many of them.\nPlease be careful.<ab(2000)><ed()>"
+  }
+ ]
+}

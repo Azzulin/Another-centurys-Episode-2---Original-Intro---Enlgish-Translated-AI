@@ -101,7 +101,7 @@ difference:
    git config core.autocrlf input
    ```
 
-2. Replace `tools/` and `work/` of the clone with the working folder's, and copy `docs/`, `README.md`,
+2. Replace `tools/` and `work/` of the clone with the working folder's, and copy `docs/`, `README.md`, `CLAUDE.md`,
    `CHANGELOG.md`, `AGENTS.md`, `requirements.txt` and `.gitignore` over. Leave out the ISOs, `.venv/`,
    `__pycache__/`, `work/crash/`, `work/output/_test/`, `work/output/*.iso` and
    `work/translation/agent/_quarentena_*/` (most are in `.gitignore`, but copying them wastes gigabytes). For example,
@@ -111,7 +111,7 @@ difference:
    rm -rf tools work
    tar -C "<working folder>" --exclude='__pycache__' --exclude='*.iso' --exclude='work/crash' \
        --exclude='work/output/_test' --exclude='work/translation/agent/_quarentena_*' \
-       -cf - tools work docs README.md CHANGELOG.md AGENTS.md requirements.txt .gitignore | tar -xf -
+       -cf - tools work docs README.md CHANGELOG.md AGENTS.md CLAUDE.md requirements.txt .gitignore | tar -xf -
    ```
 
 3. `git status`: nothing unexpected deleted (a file that exists only in the repository means the working folder is

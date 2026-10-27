@@ -4,6 +4,43 @@ All builds so far are internal test builds (0.0.x). The detailed working log, in
 [docs/CHANGELOG.md](docs/CHANGELOG.md). SHA-256 values are of the full image with the "Glorious" opening, as written
 by `tools/ace2/build.py`.
 
+## Patch 0.0.17 published — 2026-10-27 (no new build)
+
+- **0.0.17 patch (pre-release `v0.0.17`):** `ACE2-EN-0.0.17.xdelta` (38,911,993 bytes, xdelta3 3.0.11, SHA-256
+  `073c853666b7f43dcd04eecbee627e7eb46a426a0788734151fa02cece29ee06`) turns the untouched Special Vocal Version
+  into the English disc with the Special Vocal opening (`8e8c5ed1740faa7924ce50f10913fcb1ecfb1ace0d80185185594ffc8e1be579`);
+  `swap_movie.py` with the 2006 disc then gives exactly the audited 0.0.17 build (`33fad6e5…2300a8d`). Patches do not
+  stack: apply it to the untouched disc, not to a 0.0.16 image.
+- The repository now holds the 0.0.17 state: tools, translations (Op 04-01, mission 6907, 120 lock-on names), working
+  notes and the 0.0.17 build report. A `--svv-opening` build from these sources gives `8e8c5ed1…1be579`, the same
+  image as the patch.
+- New guide [docs/TAKING_OVER.md](docs/TAKING_OVER.md): for whoever continues the project or starts their own from
+  it. Setup and how to prove it reproduces 0.0.17, the rules that keep the disc working, the change loop, the open
+  tasks in order, where every decision is recorded, what no longer runs.
+- [STATUS.md](docs/STATUS.md) issue 8: an audit of the 0.0.17 image against the widget sizes measured in game found
+  lines over their widget, already present in 0.0.16: the memory card messages (85–100 characters in 80), two Free
+  Mission objectives over 32, and about 45 probable menu and briefing lines. First task of 0.0.18.
+- README: summary in Portuguese; `CLAUDE.md` (commands for Claude Code) is now in the repository. Guides point to
+  the 0.0.17 patch.
+
+## 0.0.17 — 2026-10-23
+
+- **Op 04-01 was entirely in Japanese through 0.0.16** (objective, counter, radio, every pilot line), and so were
+  the lock-on names of Op 04-02. The briefings, the debriefing and the other two missions of Op 4 were already in
+  English.
+- Cause: its mission file has an empty enemy list (`+8` = 0), so its header is identical to the LZSS signature. The
+  extractor took it for a compressed resource and skipped it. `is_packed` now also requires a size the stream can
+  produce (at most 8x the resource); only 4 resources change class (6041, 42041, 6907, 203).
+- Enemy-name lists are now read by their count (byte `+28`) instead of up to `+12`, and mission files without a
+  dialogue table (43 of them) are recognized too: 344 more name tables in 125 mission files (786 in all).
+- Translated: Op 04-01 (43 rows, 38 new), the extra Nadesico mission 6907 (3 rows) and 31 new lock-on names (Nu Gundam,
+  Devil Gundam, Gundam Head, Dankova, Zakaal, Geara Doga…). "Deathscythe Hell" without "Gundam", to stay within the
+  widest Japanese name.
+- Still in Japanese: the second table of the mission files (`+24`), with object and target names on the HUD
+  ("チューリップ", "ソーラー施設"…): 116 rows in 76 files.
+- Mission files at most +800 bytes (6010, unchanged), −12,048 bytes in total; 6041/42041 +384 each.
+- 651 resources changed; audit PASS. SHA-256 `33fad6e583aa305123afbf4e2d6c41f6b110d6ad395cc32789d87369e2300a8d`.
+
 ## Patch 0.0.16 published — 2026-10-17 (no new build)
 
 - **0.0.16 patch (pre-release `v0.0.16`):** `ACE2-EN-0.0.16.xdelta` (38,906,005 bytes, xdelta3 3.0.11) turns the

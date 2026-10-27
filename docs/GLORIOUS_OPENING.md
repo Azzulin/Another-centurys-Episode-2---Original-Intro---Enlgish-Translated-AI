@@ -101,7 +101,8 @@ byte-identical to what it was before (tested).
 |---|---|
 | Special Vocal Version, untouched | `efd791e7c50af2ec476f4026c6bda57fcf6d64babf20c12174db642b54941741` |
 | Special Vocal Version, untouched, with "Glorious" | `8030b61bd616a817be29e87315f5c41d326c166705bd306d0c5cecca766e48fb` |
-| English build 0.0.16 with "Glorious" (what `build.py --version 0.0.16 --write` writes, and the published 0.0.16 patch + this tool) | `888f11d1e518cd45a7b71002cd041ee087e537e592d8e6d68cb8825f5b4ac79e` |
+| English build 0.0.17 with "Glorious" (what `build.py --version 0.0.17 --write` writes, and the published 0.0.17 patch + this tool) | `33fad6e583aa305123afbf4e2d6c41f6b110d6ad395cc32789d87369e2300a8d` |
+| English build 0.0.16 with "Glorious" (the published 0.0.16 patch + this tool) | `888f11d1e518cd45a7b71002cd041ee087e537e592d8e6d68cb8825f5b4ac79e` |
 | English build 0.0.10 with "Glorious" (the published 0.0.10 patch + this tool) | `3e8c61433aab58bafa3fb0ff6c0f55d95c63d8eefde1be441d8737be5d578c12` |
 | English releases | listed in each release's `ACE2-EN-<version>-SHA256.txt` |
 
@@ -111,7 +112,7 @@ When you build the English disc from source ([BUILD_FROM_SOURCE.md](BUILD_FROM_S
 takes the 2006 `MOVIE001.PSS` itself while rebuilding the disc, and `tools/ace2/audit_iso.py` fails the image if the
 movie is not byte-identical to the 2006 one. `build.py --svv-opening` keeps the Special Vocal opening instead (for
 people without the 2006 disc); `swap_movie.py` can add "Glorious" to that image later, and the result is
-byte-identical to the normal build (checked for 0.0.10 and 0.0.16).
+byte-identical to the normal build (checked for 0.0.10, 0.0.16 and 0.0.17).
 
 The release patch is made from the build **with the Special Vocal opening put back** (`tools/ace2/make_patch.py`), so
 it never contains the 2006 movie ([RELEASING.md](RELEASING.md)).

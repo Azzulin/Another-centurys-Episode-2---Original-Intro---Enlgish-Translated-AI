@@ -19,7 +19,8 @@ Checks:
 import collections, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
-from ace2lib import BASE, BASE_EXE, ORIGINAL_RELEASE, SECTOR, Disc, iso_files, mission_table, mission_text_bytes, require
+from ace2lib import BASE, BASE_EXE, ORIGINAL_RELEASE, SECTOR, Disc, iso_files, mission_container, mission_text_bytes, \
+    require
 import exe
 from textdb import discover, TOKEN
 from disc import file_digest
@@ -94,7 +95,7 @@ def main():
         old, new = base.get(rid), out.get(rid)
         if 2000 <= rid < 2300 and old[:4] == b'VMD\0':
             partner[rid] = len(new) - len(old)
-        if mission_table(old) and mission_table(new):
+        if mission_container(old) and mission_container(new):
             growth[rid] = len(new) - len(old)
             if growth[rid] != mission_text_bytes(new) - mission_text_bytes(old):
                 bad('mission container carries dead bytes', '%d: +%d bytes, text tables +%d'
